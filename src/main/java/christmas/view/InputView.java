@@ -1,7 +1,7 @@
-package christmas.View;
+package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
-import christmas.Enums.InputMessage;
+import christmas.enums.InputMessage;
 
 public class InputView {
     public static String inputVisitDate(){
@@ -10,9 +10,9 @@ public class InputView {
         return visit_date;
     }
 
-    public static String inputMenu(){
+    public static String[] inputMenu(){
         System.out.println(InputMessage.MENU_INPUT.getMessage());
-        String visit_date = Console.readLine();
-        return visit_date;
+        String menu = Console.readLine();
+        return menu.split(",");
     }
 }

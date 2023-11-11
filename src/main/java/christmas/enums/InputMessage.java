@@ -1,4 +1,4 @@
-package christmas.Enums;
+package christmas.enums;
 
 public enum InputMessage {
     START_PLANNER("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
