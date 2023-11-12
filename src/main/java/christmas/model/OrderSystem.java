@@ -1,13 +1,13 @@
 package christmas.model;
 
 import christmas.enums.MenuItemList;
-
+import christmas.model.Menu;
 import java.util.ArrayList;
 import java.util.List;
 
 public class OrderSystem {
     public static Menu initMenu(){
-        Menu menu = initMenu();
+        Menu menu = new Menu(initMenuItem());
         return menu;
     }
 

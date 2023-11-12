@@ -1,5 +1,6 @@
 package christmas.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Menu {
@@ -7,5 +8,20 @@ public class Menu {
 
     public Menu(List<MenuItem> menu){
         this.menu = menu;
+    }
+
+    public boolean findMenuItem(String name){
+        for(MenuItem item : getAllmenuItem()){
+            if(item.getName().equals(name)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public List<MenuItem> getAllmenuItem(){
+        List<MenuItem> allItems = new ArrayList<>();
+        allItems.addAll(menu);
+        return allItems;
     }
 }
