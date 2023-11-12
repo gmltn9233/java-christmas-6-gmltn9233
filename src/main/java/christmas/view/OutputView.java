@@ -25,22 +25,27 @@ public class OutputView {
         return afterDiscountTotal;
     }
 
-    public static int displayBenefitDetails(Receipt receipt, Menu menu,int afterDiscountTotal){
+    public static int displayBenefitDetails(Receipt receipt, Menu menu,int beforeDiscountTotal){
         int visitDate = receipt.getVisitDate();
         int benefitmAmount = 0;
         System.out.println(OutputMessage.BENEFIT_DETAILS.getMessage());
-        benefitmAmount += displayChristmasEvent(receipt,visitDate);
-        benefitmAmount +=displayWeekEvent(receipt,menu,visitDate);
-        benefitmAmount +=displayWeekendEvent(receipt,menu,visitDate);
-        benefitmAmount +=displaySpecialEvent(receipt,visitDate);
-        benefitmAmount +=displayGIftEvent(afterDiscountTotal);
-        System.out.println("\n");
+        if(Calculator.canEvent(beforeDiscountTotal)){
+            benefitmAmount -= displayChristmasEvent(receipt,visitDate);
+            benefitmAmount -=displayWeekEvent(receipt,menu,visitDate);
+            benefitmAmount -=displayWeekendEvent(receipt,menu,visitDate);
+            benefitmAmount -=displaySpecialEvent(receipt,visitDate);
+            benefitmAmount -=displayGiftEvent(beforeDiscountTotal);
+        }
+        if(!Calculator.canEvent(beforeDiscountTotal)){
+            System.out.println(EventMessage.NO_EVENT.getEvent());
+        }
+        System.out.println();
         return benefitmAmount;
     }
 
     public static void displayTotalBenefit(int totalDiscount){
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
-        System.out.println("-"+totalDiscount+"원");
+        System.out.println(totalDiscount+"원\n");
     }
 
     public static void displayAfterDiscount(int beforeDiscount, int totalDiscount){
@@ -49,16 +54,16 @@ public class OutputView {
         if(Calculator.isGift(beforeDiscount)){
             giftPrice = EventMessage.GIFT_DISCOUNT.getDiscount();
         }
-        System.out.println(beforeDiscount-totalDiscount+giftPrice+"원\n");
+        System.out.println(beforeDiscount+totalDiscount+giftPrice+"원\n");
     }
 
     public static void displayEventBadge(int totalDiscount){
-        System.out.println(OutputMessage.EVENT_BADGE);
+        System.out.println(OutputMessage.EVENT_BADGE.getMessage());
         System.out.println(Calculator.badgeJudge(totalDiscount));
     }
 
     private static void displayCombination(String event, int benefit){
-        System.out.println(event+": -"+benefit+"원");
+        System.out.println(event+": "+(-benefit)+"원");
     }
 
     private static int displayChristmasEvent(Receipt receipt, int visitDate){
@@ -101,7 +106,7 @@ public class OutputView {
         return 0;
     }
 
-    private static int displayGIftEvent(int afterDiscountTotal){
+    private static int displayGiftEvent(int afterDiscountTotal){
         if(Calculator.isGift(afterDiscountTotal)){
             String event = EventMessage.GIFT_DISCOUNT.getEvent();
             int benefit = EventMessage.GIFT_DISCOUNT.getDiscount();

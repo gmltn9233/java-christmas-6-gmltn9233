@@ -15,6 +15,7 @@ public class Calculator {
 
     private static final int GIFT_CRITERIA=120000;
     private static final int MINIMUM=0;
+    private static final int EVENT_CRITERIA=10000;
 
     public static int afterDiscountTotal(Receipt receipt, Menu menu){
         int total = 0;
@@ -142,5 +143,11 @@ public class Calculator {
         return Badge.NO_BADGE.getName();
     }
 
+    public static boolean canEvent(int beforeDiscountTotal){
+        if(beforeDiscountTotal<EVENT_CRITERIA){
+            return false;
+        }
+        return true;
+    }
 
 }
