@@ -12,6 +12,10 @@ public class Validator {
         validateInteger(visitDate);
     }
 
+    public static void checkMenu(String[] menus){
+
+    }
+
     private static void validateVisitDateHasText(String input){
         if (input == null || input.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.EMPTY_VISIT_DATE.getMessage());
