@@ -118,5 +118,14 @@ public class InputViewTest {
                 .hasMessageContaining(ErrorMessage.DUPLICATED_MENU.getMessage());
     }
 
+    @DisplayName("음료만 주문 하였을 경우 예외가 발생한다.")
+    @Test
+    void testOnlyBeverage(){
+        String[] input = {"레드와인-3","제로콜라-2"};
+        assertThatThrownBy(()-> Validator.checkMenu(input,menu))
+                .isInstanceOf(IllegalArgumentException.class)
+                .hasMessageContaining(ErrorMessage.ONLY_BEVERAGE.getMessage());
+    }
+
 
 }
