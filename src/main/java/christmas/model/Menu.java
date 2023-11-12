@@ -1,11 +1,17 @@
 package christmas.model;
 
-public class Menu {
-    private final String name;
-    private final int quantity;
+import java.util.List;
 
-    public Menu(String name, int quantity){
-        this.name = name;
-        this. quantity = quantity;
+public class Menu {
+    private List<MenuItem> appetizers;
+    private List<MenuItem> mainDishes;
+    private List<MenuItem> desserts;
+    private List<MenuItem> beverages;
+
+    public Menu(List<MenuItem> appetizers, List<MenuItem> mainDishes, List<MenuItem> desserts, List<MenuItem> beverages ){
+        this.appetizers = appetizers;
+        this.mainDishes = mainDishes;
+        this.desserts = desserts;
+        this.beverages = beverages;
     }
 }

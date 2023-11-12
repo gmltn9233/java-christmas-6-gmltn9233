@@ -4,11 +4,11 @@ import java.util.List;
 
 public class Receipt {
     private final int visitDate;
-    private final List<Menu> menus;
+    private final List<OrderMenu> orderMenus;
 
-    public Receipt(int visitDate, List<Menu> menus){
+    public Receipt(int visitDate, List<OrderMenu> orderMenus){
         this.visitDate = visitDate;
-        this.menus = menus;
+        this.orderMenus = orderMenus;
     }
 
 }
