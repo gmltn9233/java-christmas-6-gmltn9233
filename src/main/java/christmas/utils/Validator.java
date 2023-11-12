@@ -23,12 +23,12 @@ public class Validator {
     public static Map<String,Integer> checkMenu(String[] menus, Menu menuList){
         Map<String, Integer> orderItems = new HashMap<>();
         for (String menu : menus){
-            String[] parts = menu.split("-");
-            validateSplit(parts);
+            String[] parts = validateAndSplitMenu(menu);
             String menuName = parts[0].trim();
             String quantity = parts[1].trim();
             checkMenuName(menuName,menuList);
             checkQuantity(quantity);
+            validateDuplicate(orderItems,menuName);
             orderItems.put(menuName,Integer.parseInt(quantity));
         }
         checkItems(orderItems);
@@ -46,7 +46,6 @@ public class Validator {
     }
 
     private static void checkItems(Map<String,Integer> orderItems){
-        validateDuplicateName(orderItems);
         validateTotalQuantity(orderItems);
     }
 
@@ -64,10 +63,19 @@ public class Validator {
         }
         validateRange(input);
     }
+
+
     private static void validateRange(String input){
         if(Integer.parseInt(input) < MINIMUM_DATE || Integer.parseInt(input) > MAXIMUM_DATE){
             throw new IllegalArgumentException(ErrorMessage.NOT_IN_RANGE.getMessage());
         }
+    }
+
+
+    private static String[] validateAndSplitMenu(String menu) {
+        String[] parts = menu.split("-");
+        validateSplit(parts);
+        return parts;
     }
 
     private static void validateSplit(String[] parts){
@@ -111,14 +119,12 @@ public class Validator {
         }
     }
 
-    private static void validateDuplicateName(Map<String,Integer> input){
-        Set<String> keys =new HashSet<>();
-        for(Map.Entry<String, Integer> entry : input.entrySet()){
+    private static void validateDuplicate(Map<String,Integer>input , String name){
+        for(Map.Entry<String,Integer> entry : input.entrySet()){
             String key = entry.getKey();
-            if (!keys.contains(key)) {
+            if(name.equals(key)){
                 throw new IllegalArgumentException(ErrorMessage.DUPLICATED_MENU.getMessage());
             }
-            keys.add(key);
         }
     }
 
