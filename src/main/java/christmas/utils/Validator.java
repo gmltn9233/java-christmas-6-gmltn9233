@@ -1,7 +1,9 @@
 package christmas.utils;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.regex.Pattern;
 import christmas.enums.ErrorMessage;
 import christmas.model.Menu;
@@ -110,13 +112,13 @@ public class Validator {
     }
 
     private static void validateDuplicateName(Map<String,Integer> input){
-        Map<String,Integer> dummy = new HashMap<>();
+        Set<String> keys =new HashSet<>();
         for(Map.Entry<String, Integer> entry : input.entrySet()){
             String key = entry.getKey();
-            if(dummy.containsKey(key)){
+            if (!keys.contains(key)) {
                 throw new IllegalArgumentException(ErrorMessage.DUPLICATED_MENU.getMessage());
             }
-            dummy.put(key,1);
+            keys.add(key);
         }
     }
 
@@ -126,7 +128,7 @@ public class Validator {
             Integer value = entry.getValue();
             total += value;
             if(total > MAXIMUM_QUANTITY){
-                throw new IllegalArgumentException(ErrorMessage.DUPLICATED_MENU.getMessage());
+                throw new IllegalArgumentException(ErrorMessage.QUANTITY_MAXIMUM.getMessage());
             }
         }
     }
