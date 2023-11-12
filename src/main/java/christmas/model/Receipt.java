@@ -11,4 +11,11 @@ public class Receipt {
         this.orderMenus = orderMenus;
     }
 
+    public int getVisitDate(){
+        return visitDate;
+    }
+
+    public List<OrderMenu> getOrderMenus(){
+        return orderMenus;
+    }
 }
