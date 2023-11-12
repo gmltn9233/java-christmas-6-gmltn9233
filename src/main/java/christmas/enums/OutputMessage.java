@@ -5,6 +5,8 @@ public enum OutputMessage {
     ORDER_MENU("<주문 메뉴>"),
     BEFORE_DISCOUNT_AMOUNT("<할인 전 총주문 금액>"),
     GIFT_MENU("<증정 메뉴>"),
+    NO_GIFT("없음"),
+    YES_GIFT("샴페인 1개"),
     BENEFIT_DETAILS("<혜택 내역>"),
     TOTAL_BENEFIT_AMOUNT("<총혜택 금액>"),
     AFTER_DISCOUNT_AMOUNT("<할인 후 예상 결제 금액>"),
