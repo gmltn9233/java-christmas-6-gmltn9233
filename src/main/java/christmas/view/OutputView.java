@@ -25,59 +25,77 @@ public class OutputView {
         return afterDiscountTotal;
     }
 
-    public static void displayBenefitDetails(Receipt receipt, Menu menu,int afterDiscountTotal){
+    public static int displayBenefitDetails(Receipt receipt, Menu menu,int afterDiscountTotal){
         int visitDate = receipt.getVisitDate();
+        int benefitmAmount = 0;
         System.out.println(OutputMessage.BENEFIT_DETAILS.getMessage());
-        displayChristmasEvent(receipt,visitDate);
-        displayWeekEvent(receipt,menu,visitDate);
-        displayWeekendEvent(receipt,menu,visitDate);
-        displaySpecialEvent(receipt,visitDate);
-        displayGIftEvent(afterDiscountTotal);
+        benefitmAmount += displayChristmasEvent(receipt,visitDate);
+        benefitmAmount +=displayWeekEvent(receipt,menu,visitDate);
+        benefitmAmount +=displayWeekendEvent(receipt,menu,visitDate);
+        benefitmAmount +=displaySpecialEvent(receipt,visitDate);
+        benefitmAmount +=displayGIftEvent(afterDiscountTotal);
         System.out.println("\n");
+        return benefitmAmount;
     }
+
+    public static void displayTotalBenefit(int afterDiscount){
+        System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
+        System.out.println("-"+afterDiscount+"원");
+    }
+
 
     private static void displayCombination(String event, int benefit){
         System.out.println(event+": -"+benefit+"원");
     }
 
-    private static void displayChristmasEvent(Receipt receipt, int visitDate){
+    private static int displayChristmasEvent(Receipt receipt, int visitDate){
         if(Calculator.isChristmasEvent(visitDate)){
             String event = EventMessage.CHRISTMAS_DISCOUNT.getEvent();
             int benefit = Calculator.christmasEvent(receipt);
             displayCombination(event,benefit);
+            return benefit;
         }
+        return 0;
     }
 
-    private static void displayWeekEvent(Receipt receipt,Menu menu, int visitDate){
+    private static int displayWeekEvent(Receipt receipt,Menu menu, int visitDate){
         if(Calculator.isWeekEvent(visitDate)){
             String event = EventMessage.WEEK_DISCOUNT.getEvent();
             int benefit = Calculator.weekEvent(receipt,menu);
             displayCombination(event,benefit);
+            return benefit;
         }
+        return 0;
     }
 
-    private static void displayWeekendEvent(Receipt receipt,Menu menu, int visitDate){
+    private static int displayWeekendEvent(Receipt receipt,Menu menu, int visitDate){
         if(Calculator.isWeekendEvent(visitDate)){
             String event = EventMessage.WEEKEND_DISCOUNT.getEvent();
             int benefit = Calculator.weekendEvent(receipt,menu);
             displayCombination(event,benefit);
+            return benefit;
         }
+        return 0;
     }
 
-    private static void displaySpecialEvent(Receipt receipt, int visitDate){
+    private static int displaySpecialEvent(Receipt receipt, int visitDate){
         if(Calculator.isSpecialEvent(visitDate)){
             String event = EventMessage.SPECIAL_DISCOUNT.getEvent();
             int benefit = Calculator.specialEvent(receipt);
             displayCombination(event,benefit);
+            return benefit;
         }
+        return 0;
     }
 
-    private static void displayGIftEvent(int afterDiscountTotal){
+    private static int displayGIftEvent(int afterDiscountTotal){
         if(Calculator.isGift(afterDiscountTotal)){
             String event = EventMessage.GIFT_DISCOUNT.getEvent();
             int benefit = EventMessage.GIFT_DISCOUNT.getDiscount();
             displayCombination(event,benefit);
+            return benefit;
         }
+        return 0;
     }
 
     public static void displayGift(int afterDiscountTotal){
