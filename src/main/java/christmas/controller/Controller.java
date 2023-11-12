@@ -17,5 +17,6 @@ public class Controller {
         int benefitmAmount = OutputView.displayBenefitDetails(receipt,menu,afterDiscountTotal);
         OutputView.displayTotalBenefit(benefitmAmount);
         OutputView.displayAfterDiscount(afterDiscountTotal,benefitmAmount);
+        OutputView.displayEventBadge(benefitmAmount);
     }
 }

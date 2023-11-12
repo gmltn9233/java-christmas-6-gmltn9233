@@ -49,9 +49,13 @@ public class OutputView {
         if(Calculator.isGift(beforeDiscount)){
             giftPrice = EventMessage.GIFT_DISCOUNT.getDiscount();
         }
-        System.out.println(beforeDiscount-totalDiscount+giftPrice+"원");
+        System.out.println(beforeDiscount-totalDiscount+giftPrice+"원\n");
     }
 
+    public static void displayEventBadge(int totalDiscount){
+        System.out.println(OutputMessage.EVENT_BADGE);
+        System.out.println(Calculator.badgeJudge(totalDiscount));
+    }
 
     private static void displayCombination(String event, int benefit){
         System.out.println(event+": -"+benefit+"원");

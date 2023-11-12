@@ -1,5 +1,6 @@
 package christmas.utils;
 
+import christmas.enums.Badge;
 import christmas.enums.EventMessage;
 import christmas.enums.OutputMessage;
 import christmas.model.OrderMenu;
@@ -128,6 +129,18 @@ public class Calculator {
         return 0;
     }
 
+    public static String badgeJudge(int totalBenfeit){
+        if(totalBenfeit>= Badge.SANTA.getCriteria()){
+            return Badge.SANTA.getName();
+        }
+        if(totalBenfeit>=Badge.TREE.getCriteria()){
+            return Badge.TREE.getName();
+        }
+        if(totalBenfeit>=Badge.STAR.getCriteria()){
+            return Badge.STAR.getName();
+        }
+        return Badge.NO_BADGE.getName();
+    }
 
 
 }
