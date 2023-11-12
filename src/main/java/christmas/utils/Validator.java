@@ -31,6 +31,7 @@ public class Validator {
             validateDuplicate(orderItems,menuName);
             orderItems.put(menuName,Integer.parseInt(quantity));
         }
+        onlyBeverage(orderItems,menuList);
         checkItems(orderItems);
         return orderItems;
     }
@@ -136,6 +137,19 @@ public class Validator {
             if(total > MAXIMUM_QUANTITY){
                 throw new IllegalArgumentException(ErrorMessage.QUANTITY_MAXIMUM.getMessage());
             }
+        }
+    }
+
+    private static void onlyBeverage(Map<String,Integer> input, Menu menu){
+        int count = 0;
+        for(Map.Entry<String, Integer> entry : input.entrySet()){
+            String category = menu.getMenuCategory(entry.getKey());
+            if(category.equals("beverages")){
+                ++count;
+            }
+        }
+        if(count == input.size()){
+            throw new IllegalArgumentException(ErrorMessage.ONLY_BEVERAGE.getMessage());
         }
     }
 }

@@ -12,6 +12,7 @@ public enum ErrorMessage {
     QUANTITY_MINIMUM("주문 수량은 최소 1개 입니다."),
     QUANTITY_MAXIMUM("총 메뉴는 최대 20개 까지만 주문할 수 있습니다."),
     DUPLICATED_MENU("메뉴가 중복됩니다! 메뉴는 한번에 시켜주세요."),
+    ONLY_BEVERAGE("음료만 주문할 수 없습니다."),
     PREFIX("[ERROR] ");
     private final String message;
     ErrorMessage(String message){
