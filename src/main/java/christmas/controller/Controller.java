@@ -14,5 +14,6 @@ public class Controller {
         OutputView.displayOrderList(receipt);
         int afterDiscountTotal = OutputView.displayAfterDiscount(receipt,menu);
         OutputView.displayGift(afterDiscountTotal);
+        OutputView.displayBenefitDetails(receipt,menu,afterDiscountTotal);
     }
 }

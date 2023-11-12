@@ -6,7 +6,8 @@ public enum EventMessage {
             , 100),
     WEEK_DISCOUNT("평일 할인", new int[]{3, 4, 5, 6, 7, 10, 11, 12, 13, 14, 17, 18, 19, 20, 21, 24, 25, 26, 27, 28, 31}, 2023),
     WEEKEND_DISCOUNT("주말 할인", new int[]{1, 2, 8, 9, 15, 16, 22, 23, 29, 30}, 2023),
-    SPECIAL_DISCOUNT("특별 할인", new int[]{3, 10, 17, 24, 25, 31}, 1000);
+    SPECIAL_DISCOUNT("특별 할인", new int[]{3, 10, 17, 24, 25, 31}, 1000),
+    GIFT_DISCOUNT("증정 이벤트",null,25000);
 
     private final String event;
     private final int[] days;
