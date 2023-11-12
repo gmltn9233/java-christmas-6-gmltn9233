@@ -1,9 +1,6 @@
 package christmas.utils;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.Pattern;
 import christmas.enums.ErrorMessage;
 import christmas.model.Menu;
@@ -74,6 +71,9 @@ public class Validator {
 
 
     private static String[] validateAndSplitMenu(String menu) {
+        if (!menu.contains("-")){
+            throw new IllegalArgumentException(ErrorMessage.NOT_SPLIT.getMessage());
+        }
         String[] parts = menu.split("-");
         validateSplit(parts);
         return parts;
