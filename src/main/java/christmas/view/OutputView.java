@@ -38,9 +38,18 @@ public class OutputView {
         return benefitmAmount;
     }
 
-    public static void displayTotalBenefit(int afterDiscount){
+    public static void displayTotalBenefit(int totalDiscount){
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
-        System.out.println("-"+afterDiscount+"원");
+        System.out.println("-"+totalDiscount+"원");
+    }
+
+    public static void displayAfterDiscount(int beforeDiscount, int totalDiscount){
+        int giftPrice = 0;
+        System.out.println(OutputMessage.AFTER_DISCOUNT_AMOUNT.getMessage());
+        if(Calculator.isGift(beforeDiscount)){
+            giftPrice = EventMessage.GIFT_DISCOUNT.getDiscount();
+        }
+        System.out.println(beforeDiscount-totalDiscount+giftPrice+"원");
     }
 
 
