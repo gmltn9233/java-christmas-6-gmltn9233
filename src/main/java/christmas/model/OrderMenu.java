@@ -1,11 +1,10 @@
 package christmas.model;
 
 public class OrderMenu {
-    private final MenuItem name;
+    private final String name;
     private final int quantity;
-
-    public OrderMenu(MenuItem name, int quantity){
+    public OrderMenu(String name, int quantity){
         this.name = name;
-        this. quantity = quantity;
+        this.quantity = quantity;
     }
 }

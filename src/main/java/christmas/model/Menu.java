@@ -1,5 +1,7 @@
 package christmas.model;
 
+import christmas.enums.ErrorMessage;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +19,24 @@ public class Menu {
             }
         }
         return false;
+    }
+
+    public int getMenuPrice(String name){
+        for(MenuItem item : getAllmenuItem()){
+            if(item.getName().equals(name)){
+                return item.getPrice();
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.NOT_IN_MENU.getMessage());
+    }
+
+    public String getMenuCategory(String name){
+        for(MenuItem item : getAllmenuItem()){
+            if(item.getName().equals(name)){
+                return item.getCategory();
+            }
+        }
+        throw new IllegalArgumentException(ErrorMessage.NOT_IN_MENU.getMessage());
     }
 
     public List<MenuItem> getAllmenuItem(){
