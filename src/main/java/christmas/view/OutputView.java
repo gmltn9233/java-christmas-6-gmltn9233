@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.enums.Badge;
 import christmas.enums.EventMessage;
 import christmas.enums.OutputMessage;
 import christmas.model.Menu;
@@ -63,8 +64,12 @@ public class OutputView {
 
     public static void displayEventBadge(int totalDiscount){
         System.out.println(OutputMessage.EVENT_BADGE.getMessage());
-        System.out.println(Calculator.badgeJudge(totalDiscount));
+        System.out.println(Calculator.badgeJudge(-totalDiscount)+"\n");
+        if(!Calculator.badgeJudge(-totalDiscount).equals(Badge.NO_BADGE.getName())){
+            System.out.println(OutputMessage.EVENT_NOTIFICATION.getMessage());
+        }
     }
+
 
     public static void displayPlannerStart(){
         System.out.println(OutputMessage.START_MESSAGE.getMessage());
