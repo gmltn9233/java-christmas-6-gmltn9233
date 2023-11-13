@@ -6,6 +6,7 @@ import christmas.model.Menu;
 import christmas.model.OrderMenu;
 import christmas.model.Receipt;
 import christmas.utils.Calculator;
+import java.text.DecimalFormat;
 
 
 public class OutputView {
@@ -21,7 +22,7 @@ public class OutputView {
     public static int displayAfterDiscount(Receipt receipt, Menu menu){
         System.out.println(OutputMessage.BEFORE_DISCOUNT_AMOUNT.getMessage());
         int afterDiscountTotal=Calculator.afterDiscountTotal(receipt,menu);
-        System.out.println(afterDiscountTotal+"원\n");
+        System.out.println(formatWon(afterDiscountTotal)+"\n");
         return afterDiscountTotal;
     }
 
@@ -45,7 +46,7 @@ public class OutputView {
 
     public static void displayTotalBenefit(int totalDiscount){
         System.out.println(OutputMessage.TOTAL_BENEFIT_AMOUNT.getMessage());
-        System.out.println(totalDiscount+"원\n");
+        System.out.println(formatWon(totalDiscount)+"\n");
     }
 
     public static void displayAfterDiscount(int beforeDiscount, int totalDiscount){
@@ -54,7 +55,7 @@ public class OutputView {
         if(Calculator.isGift(beforeDiscount)){
             giftPrice = EventMessage.GIFT_DISCOUNT.getDiscount();
         }
-        System.out.println(beforeDiscount+totalDiscount+giftPrice+"원\n");
+        System.out.println(formatWon(beforeDiscount+totalDiscount+giftPrice)+"\n");
     }
 
     public static void displayEventBadge(int totalDiscount){
@@ -63,7 +64,7 @@ public class OutputView {
     }
 
     private static void displayCombination(String event, int benefit){
-        System.out.println(event+": "+(-benefit)+"원");
+        System.out.println(event+": "+formatWon(-benefit));
     }
 
     private static int displayChristmasEvent(Receipt receipt, int visitDate){
@@ -129,11 +130,16 @@ public class OutputView {
         System.out.println("12월 "+receipt.getVisitDate()+OutputMessage.VISIT_DATE.getMessage()+"\n");
     }
 
-    public static String isGift(int amount){
+    private static String isGift(int amount){
         if(Calculator.isGift(amount)){
             return OutputMessage.YES_GIFT.getMessage();
         }
         return OutputMessage.NO_GIFT.getMessage();
+    }
+
+    private static String formatWon(int amount){
+        DecimalFormat formatter = new DecimalFormat("#,###,###원");
+        return formatter.format(amount);
     }
 
 
