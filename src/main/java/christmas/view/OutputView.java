@@ -137,7 +137,7 @@ public class OutputView {
         return OutputMessage.NO_GIFT.getMessage();
     }
 
-    private static String formatWon(int amount){
+    public static String formatWon(int amount){
         DecimalFormat formatter = new DecimalFormat("#,###,###원");
         return formatter.format(amount);
     }
