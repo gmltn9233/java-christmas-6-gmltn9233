@@ -1,6 +1,12 @@
 package christmas.enums;
 
 public enum OutputMessage {
+    START_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
+    MENU_LIST("[우테코 식당의 메뉴]"),
+    APPETIZERS("<애피타이저>"),
+    MAIN_DISHES("<메인>"),
+    DESSERTS("<디저트>"),
+    BEVERAGES("<음료>"),
     VISIT_DATE("일에 우테코 식당에서 받을 이벤트 헤택 미리 보기!"),
     ORDER_MENU("<주문 메뉴>"),
     BEFORE_DISCOUNT_AMOUNT("<할인 전 총주문 금액>"),

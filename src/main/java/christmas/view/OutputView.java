@@ -3,10 +3,13 @@ package christmas.view;
 import christmas.enums.EventMessage;
 import christmas.enums.OutputMessage;
 import christmas.model.Menu;
+import christmas.model.MenuItem;
 import christmas.model.OrderMenu;
 import christmas.model.Receipt;
 import christmas.utils.Calculator;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class OutputView {
@@ -61,6 +64,71 @@ public class OutputView {
     public static void displayEventBadge(int totalDiscount){
         System.out.println(OutputMessage.EVENT_BADGE.getMessage());
         System.out.println(Calculator.badgeJudge(totalDiscount));
+    }
+
+    public static void displayPlannerStart(){
+        System.out.println(OutputMessage.START_MESSAGE.getMessage());
+    }
+
+    public static void displayMenuList(Menu menu){
+        System.out.println(OutputMessage.MENU_LIST.getMessage());
+        displayAppetizers(menu);
+        displayMainDishes(menu);
+        displayDesserts(menu);
+        displayBeverages(menu);
+    }
+
+    private static String formatMenu(String name, int price){
+        return name+"("+formatWon(price)+")";
+    }
+
+    private static void formatMenus(List<String> list){
+        System.out.println(String.join(",",list)+"\n");
+    }
+
+    private static void displayAppetizers(Menu menu){
+        List<String> appetizers = new ArrayList<>();
+        System.out.println(OutputMessage.APPETIZERS.getMessage());
+        for(MenuItem menuItem : menu.getAllmenuItem()){
+            if(menu.getMenuCategory(menuItem.getName())=="appetizers"){
+                appetizers.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
+            }
+        }
+        formatMenus(appetizers);
+    }
+
+    private static void displayMainDishes(Menu menu){
+        List<String> mainDishes = new ArrayList<>();
+        System.out.println(OutputMessage.MAIN_DISHES.getMessage());
+        for(MenuItem menuItem : menu.getAllmenuItem()){
+            if(menu.getMenuCategory(menuItem.getName())=="mainDishes"){
+                mainDishes.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
+            }
+        }
+        formatMenus(mainDishes);
+    }
+
+    private static void displayDesserts(Menu menu){
+        List<String> desserts = new ArrayList<>();
+        System.out.println(OutputMessage.DESSERTS.getMessage());
+        for(MenuItem menuItem : menu.getAllmenuItem()){
+            if(menu.getMenuCategory(menuItem.getName())=="desserts"){
+                desserts.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
+            }
+        }
+        formatMenus(desserts);
+
+    }
+
+    private static void displayBeverages(Menu menu){
+        List<String> beverages = new ArrayList<>();
+        System.out.println(OutputMessage.BEVERAGES.getMessage());
+        for(MenuItem menuItem : menu.getAllmenuItem()){
+            if(menu.getMenuCategory(menuItem.getName())=="beverages"){
+                beverages.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
+            }
+        }
+        formatMenus(beverages);
     }
 
     private static void displayCombination(String event, int benefit){
