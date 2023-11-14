@@ -21,11 +21,12 @@ public enum OutputMessage {
     EVENT_BADGE("<12월 이벤트 배지>"),
     NEW_YEAR_EVENT("이 배지를 가지고 2024년 새해 이벤트에 참여하시면 새해 선물을 드립니다!");
     String message;
-    OutputMessage(String message){
+
+    OutputMessage(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return message;
     }
 

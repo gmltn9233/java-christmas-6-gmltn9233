@@ -15,11 +15,12 @@ public enum ErrorMessage {
     ONLY_BEVERAGE("음료만 주문할 수 없습니다."),
     PREFIX("[ERROR] ");
     private final String message;
-    ErrorMessage(String message){
+
+    ErrorMessage(String message) {
         this.message = message;
     }
 
-    public String getMessage(){
+    public String getMessage() {
         return PREFIX.message + message;
     }
 }
