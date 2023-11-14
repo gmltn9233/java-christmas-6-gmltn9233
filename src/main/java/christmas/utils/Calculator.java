@@ -72,7 +72,7 @@ public class Calculator {
         return 0;
     }
 
-    private static int countDesserts(List<OrderMenu> orderMenus, Menu menu){
+    public static int countDesserts(List<OrderMenu> orderMenus, Menu menu){
         int count = 0;
         for(OrderMenu orderMenu : orderMenus){
             String name = orderMenu.getName();

@@ -6,6 +6,7 @@ import christmas.model.Receipt;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
+import javax.print.attribute.standard.MediaSize;
 import java.util.Map;
 
 public class Controller {
@@ -13,6 +14,7 @@ public class Controller {
         Menu menu = OrderSystem.initMenu();
         OutputView.displayPlannerStart();
         int visitDate = InputView.validateInputVisitDate();
+        OutputView.displayAppliedEvent(visitDate);
         OutputView.displayMenuList(menu);
         Map<String,Integer> orderMenu = InputView.validateInputMenu(menu);
         Receipt receipt = OrderSystem.initReceipt(visitDate,orderMenu);

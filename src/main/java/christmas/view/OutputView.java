@@ -14,6 +14,30 @@ import java.util.List;
 
 
 public class OutputView {
+
+    public static void displayAppliedEvent(int visitDate){
+        System.out.println(OutputMessage.APPLIED_EVENT.getMessage());
+        if(Calculator.isChristmasEvent(visitDate)){
+            formatEventDetails(EventMessage.CHRISTMAS_DISCOUNT.getEventName(),EventMessage.CHRISTMAS_DISCOUNT.getEventDetails());
+        }
+        if(Calculator.isWeekEvent(visitDate)){
+            formatEventDetails(EventMessage.WEEK_DISCOUNT.getEventName(), EventMessage.WEEK_DISCOUNT.getEventDetails());
+        }
+        if(Calculator.isWeekendEvent(visitDate)){
+            formatEventDetails(EventMessage.WEEKEND_DISCOUNT.getEventName(), EventMessage.WEEKEND_DISCOUNT.getEventDetails());
+        }
+        if(Calculator.isSpecialEvent(visitDate)){
+            formatEventDetails(EventMessage.SPECIAL_DISCOUNT.getEventName(), EventMessage.SPECIAL_DISCOUNT.getEventDetails());
+        }
+        formatEventDetails(EventMessage.GIFT_DISCOUNT.getEventName(), EventMessage.GIFT_DISCOUNT.getEventDetails());
+        System.out.println();
+    }
+
+    private static void formatEventDetails(String eventName, String EventDetails){
+        System.out.println(eventName+": "+EventDetails);
+    }
+
+
     public static void displayOrderList(Receipt receipt){
         displayVisitDate(receipt);
         System.out.println(OutputMessage.ORDER_MENU.getMessage());
@@ -42,7 +66,7 @@ public class OutputView {
             benefitmAmount -=displayGiftEvent(beforeDiscountTotal);
         }
         if(!Calculator.canEvent(beforeDiscountTotal)){
-            System.out.println(EventMessage.NO_EVENT.getEvent());
+            System.out.println(EventMessage.NO_EVENT.getEventName());
         }
         System.out.println();
         return benefitmAmount;
@@ -142,7 +166,7 @@ public class OutputView {
 
     private static int displayChristmasEvent(Receipt receipt, int visitDate){
         if(Calculator.isChristmasEvent(visitDate)){
-            String event = EventMessage.CHRISTMAS_DISCOUNT.getEvent();
+            String event = EventMessage.CHRISTMAS_DISCOUNT.getEventName();
             int benefit = Calculator.christmasEvent(receipt);
             displayCombination(event,benefit);
             return benefit;
@@ -152,7 +176,7 @@ public class OutputView {
 
     private static int displayWeekEvent(Receipt receipt,Menu menu, int visitDate){
         if(Calculator.isWeekEvent(visitDate)){
-            String event = EventMessage.WEEK_DISCOUNT.getEvent();
+            String event = EventMessage.WEEK_DISCOUNT.getEventName();
             int benefit = Calculator.weekEvent(receipt,menu);
             displayCombination(event,benefit);
             return benefit;
@@ -162,7 +186,7 @@ public class OutputView {
 
     private static int displayWeekendEvent(Receipt receipt,Menu menu, int visitDate){
         if(Calculator.isWeekendEvent(visitDate)){
-            String event = EventMessage.WEEKEND_DISCOUNT.getEvent();
+            String event = EventMessage.WEEKEND_DISCOUNT.getEventName();
             int benefit = Calculator.weekendEvent(receipt,menu);
             displayCombination(event,benefit);
             return benefit;
@@ -172,7 +196,7 @@ public class OutputView {
 
     private static int displaySpecialEvent(Receipt receipt, int visitDate){
         if(Calculator.isSpecialEvent(visitDate)){
-            String event = EventMessage.SPECIAL_DISCOUNT.getEvent();
+            String event = EventMessage.SPECIAL_DISCOUNT.getEventName();
             int benefit = Calculator.specialEvent(receipt);
             displayCombination(event,benefit);
             return benefit;
@@ -182,7 +206,7 @@ public class OutputView {
 
     private static int displayGiftEvent(int afterDiscountTotal){
         if(Calculator.isGift(afterDiscountTotal)){
-            String event = EventMessage.GIFT_DISCOUNT.getEvent();
+            String event = EventMessage.GIFT_DISCOUNT.getEventName();
             int benefit = EventMessage.GIFT_DISCOUNT.getDiscount();
             displayCombination(event,benefit);
             return benefit;
