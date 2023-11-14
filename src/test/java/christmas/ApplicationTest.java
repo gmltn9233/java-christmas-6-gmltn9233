@@ -49,6 +49,56 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 날짜에_해당하는_이벤트_출력_평일() {
+        assertSimpleTest(() -> {
+            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "평일 할인"
+            );
+        });
+    }
+
+    @Test
+    void 날짜에_해당하는_이벤트_출력_크리스마스_이전() {
+        assertSimpleTest(() -> {
+            run("25", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "크리스마스 디데이 할인"
+            );
+        });
+    }
+
+    @Test
+    void 날짜에_해당하는_이벤트_출력_크리스마스_이후() {
+        assertSimpleTest(() -> {
+            run("26", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).doesNotContain(
+                    "크리스마스 디데이 할인"
+            );
+        });
+    }
+
+    @Test
+    void 날짜에_해당하는_이벤트_출력_주말() {
+        assertSimpleTest(() -> {
+            run("15", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "주말 할인"
+            );
+        });
+    }
+
+    @Test
+    void 날짜에_해당하는_이벤트_출력_특별() {
+        assertSimpleTest(() -> {
+            run("10", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            assertThat(output()).contains(
+                    "특별 할인"
+            );
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
