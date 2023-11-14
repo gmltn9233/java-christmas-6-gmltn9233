@@ -99,6 +99,14 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 이벤트_참여_불가_금액_부족() {
+        assertSimpleTest(() -> {
+            run("25", "타파스-1,제로콜라-1");
+            assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "없음");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});

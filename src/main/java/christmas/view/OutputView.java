@@ -30,7 +30,7 @@ public class OutputView {
             formatEventDetails(EventMessage.SPECIAL_DISCOUNT.getEventName(), EventMessage.SPECIAL_DISCOUNT.getEventDetails());
         }
         formatEventDetails(EventMessage.GIFT_DISCOUNT.getEventName(), EventMessage.GIFT_DISCOUNT.getEventDetails());
-        System.out.println();
+        System.out.println(OutputMessage.EVENT_NOTIFICATION.getMessage()+"\n");
     }
 
     private static void formatEventDetails(String eventName, String EventDetails){
@@ -90,7 +90,7 @@ public class OutputView {
         System.out.println(OutputMessage.EVENT_BADGE.getMessage());
         System.out.println(Calculator.badgeJudge(-totalDiscount)+"\n");
         if(!Calculator.badgeJudge(-totalDiscount).equals(Badge.NO_BADGE.getName())){
-            System.out.println(OutputMessage.EVENT_NOTIFICATION.getMessage());
+            System.out.println(OutputMessage.NEW_YEAR_EVENT.getMessage());
         }
     }
 

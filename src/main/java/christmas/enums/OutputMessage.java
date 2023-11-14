@@ -3,6 +3,7 @@ package christmas.enums;
 public enum OutputMessage {
     START_MESSAGE("안녕하세요! 우테코 식당 12월 이벤트 플래너입니다."),
     APPLIED_EVENT("[방문 날짜에 적용 가능한 이벤트]"),
+    EVENT_NOTIFICATION("* 총주문 금액 10,000원 이상부터 이벤트가 적용됩니다."),
     MENU_LIST("[우테코 식당의 메뉴]"),
     APPETIZERS("<애피타이저>"),
     MAIN_DISHES("<메인>"),
@@ -18,7 +19,7 @@ public enum OutputMessage {
     TOTAL_BENEFIT_AMOUNT("<총혜택 금액>"),
     AFTER_DISCOUNT_AMOUNT("<할인 후 예상 결제 금액>"),
     EVENT_BADGE("<12월 이벤트 배지>"),
-    EVENT_NOTIFICATION("이 배지를 가지고 2024년 새해 이벤트에 참여하시면 새해 선물을 드립니다!");
+    NEW_YEAR_EVENT("이 배지를 가지고 2024년 새해 이벤트에 참여하시면 새해 선물을 드립니다!");
     String message;
     OutputMessage(String message){
         this.message = message;
