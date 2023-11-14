@@ -15,6 +15,10 @@ import java.util.List;
 
 public class OutputView {
 
+    public static void displayPlannerStart(){
+        System.out.println(OutputMessage.START_MESSAGE.getMessage());
+    }
+
     public static void displayAppliedEvent(int visitDate){
         System.out.println(OutputMessage.APPLIED_EVENT.getMessage());
         if(Calculator.isChristmasEvent(visitDate)){
@@ -33,10 +37,13 @@ public class OutputView {
         System.out.println(OutputMessage.EVENT_NOTIFICATION.getMessage()+"\n");
     }
 
-    private static void formatEventDetails(String eventName, String EventDetails){
-        System.out.println(eventName+": "+EventDetails);
+    public static void displayMenuList(Menu menu){
+        System.out.println(OutputMessage.MENU_LIST.getMessage());
+        displayAppetizers(menu);
+        displayMainDishes(menu);
+        displayDesserts(menu);
+        displayBeverages(menu);
     }
-
 
     public static void displayOrderList(Receipt receipt){
         displayVisitDate(receipt);
@@ -52,6 +59,11 @@ public class OutputView {
         int afterDiscountTotal=Calculator.afterDiscountTotal(receipt,menu);
         System.out.println(formatWon(afterDiscountTotal)+"\n");
         return afterDiscountTotal;
+    }
+
+    public static void displayGift(int afterDiscountTotal){
+        System.out.println(OutputMessage.GIFT_MENU.getMessage());
+        System.out.println(giftMessage(afterDiscountTotal)+"\n");
     }
 
     public static int displayBenefitDetails(Receipt receipt, Menu menu,int beforeDiscountTotal){
@@ -94,32 +106,21 @@ public class OutputView {
         }
     }
 
-
-    public static void displayPlannerStart(){
-        System.out.println(OutputMessage.START_MESSAGE.getMessage());
+    private static void displayVisitDate(Receipt receipt){
+        System.out.println("12월 "+receipt.getVisitDate()+OutputMessage.VISIT_DATE.getMessage()+"\n");
     }
 
-    public static void displayMenuList(Menu menu){
-        System.out.println(OutputMessage.MENU_LIST.getMessage());
-        displayAppetizers(menu);
-        displayMainDishes(menu);
-        displayDesserts(menu);
-        displayBeverages(menu);
-    }
-
-    private static String formatMenu(String name, int price){
-        return name+"("+formatWon(price)+")";
-    }
-
-    private static void formatMenus(List<String> list){
-        System.out.println(String.join(",",list)+"\n");
+    private static void displayOrder(OrderMenu orderMenu){
+        String name = orderMenu.getName();
+        int quantity = orderMenu.getQuantity();
+        System.out.println(name+" "+quantity+"개");
     }
 
     private static void displayAppetizers(Menu menu){
         List<String> appetizers = new ArrayList<>();
         System.out.println(OutputMessage.APPETIZERS.getMessage());
         for(MenuItem menuItem : menu.getAllmenuItem()){
-            if(menu.getMenuCategory(menuItem.getName())=="appetizers"){
+            if(menu.getMenuCategory(menuItem.getName()).equals("appetizers")){
                 appetizers.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
             }
         }
@@ -130,7 +131,7 @@ public class OutputView {
         List<String> mainDishes = new ArrayList<>();
         System.out.println(OutputMessage.MAIN_DISHES.getMessage());
         for(MenuItem menuItem : menu.getAllmenuItem()){
-            if(menu.getMenuCategory(menuItem.getName())=="mainDishes"){
+            if(menu.getMenuCategory(menuItem.getName()).equals("mainDishes")){
                 mainDishes.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
             }
         }
@@ -141,7 +142,7 @@ public class OutputView {
         List<String> desserts = new ArrayList<>();
         System.out.println(OutputMessage.DESSERTS.getMessage());
         for(MenuItem menuItem : menu.getAllmenuItem()){
-            if(menu.getMenuCategory(menuItem.getName())=="desserts"){
+            if(menu.getMenuCategory(menuItem.getName()).equals("desserts")){
                 desserts.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
             }
         }
@@ -153,22 +154,19 @@ public class OutputView {
         List<String> beverages = new ArrayList<>();
         System.out.println(OutputMessage.BEVERAGES.getMessage());
         for(MenuItem menuItem : menu.getAllmenuItem()){
-            if(menu.getMenuCategory(menuItem.getName())=="beverages"){
+            if(menu.getMenuCategory(menuItem.getName()).equals("beverages")){
                 beverages.add(formatMenu(menuItem.getName(), menuItem.getPrice()));
             }
         }
         formatMenus(beverages);
     }
 
-    private static void displayCombination(String event, int benefit){
-        System.out.println(event+": "+formatWon(-benefit));
-    }
 
     private static int displayChristmasEvent(Receipt receipt, int visitDate){
         if(Calculator.isChristmasEvent(visitDate)){
             String event = EventMessage.CHRISTMAS_DISCOUNT.getEventName();
             int benefit = Calculator.christmasEvent(receipt);
-            displayCombination(event,benefit);
+            formatBenefitDetails(event,benefit);
             return benefit;
         }
         return 0;
@@ -178,7 +176,7 @@ public class OutputView {
         if(Calculator.isWeekEvent(visitDate)){
             String event = EventMessage.WEEK_DISCOUNT.getEventName();
             int benefit = Calculator.weekEvent(receipt,menu);
-            displayCombination(event,benefit);
+            formatBenefitDetails(event,benefit);
             return benefit;
         }
         return 0;
@@ -188,7 +186,7 @@ public class OutputView {
         if(Calculator.isWeekendEvent(visitDate)){
             String event = EventMessage.WEEKEND_DISCOUNT.getEventName();
             int benefit = Calculator.weekendEvent(receipt,menu);
-            displayCombination(event,benefit);
+            formatBenefitDetails(event,benefit);
             return benefit;
         }
         return 0;
@@ -198,7 +196,7 @@ public class OutputView {
         if(Calculator.isSpecialEvent(visitDate)){
             String event = EventMessage.SPECIAL_DISCOUNT.getEventName();
             int benefit = Calculator.specialEvent(receipt);
-            displayCombination(event,benefit);
+            formatBenefitDetails(event,benefit);
             return benefit;
         }
         return 0;
@@ -208,30 +206,29 @@ public class OutputView {
         if(Calculator.isGift(afterDiscountTotal)){
             String event = EventMessage.GIFT_DISCOUNT.getEventName();
             int benefit = EventMessage.GIFT_DISCOUNT.getDiscount();
-            displayCombination(event,benefit);
+            formatBenefitDetails(event,benefit);
             return benefit;
         }
         return 0;
     }
-
-    public static void displayGift(int afterDiscountTotal){
-        System.out.println(OutputMessage.GIFT_MENU.getMessage());
-        System.out.println(isGift(afterDiscountTotal)+"\n");
-    }
-    private static void displayOrder(OrderMenu orderMenu){
-        String name = orderMenu.getName();
-        int quantity = orderMenu.getQuantity();
-        System.out.println(name+" "+quantity+"개");
-    }
-    private static void displayVisitDate(Receipt receipt){
-        System.out.println("12월 "+receipt.getVisitDate()+OutputMessage.VISIT_DATE.getMessage()+"\n");
-    }
-
-    private static String isGift(int amount){
+    
+    private static String giftMessage(int amount){
         if(Calculator.isGift(amount)){
             return OutputMessage.YES_GIFT.getMessage();
         }
         return OutputMessage.NO_GIFT.getMessage();
+    }
+
+    private static String formatMenu(String name, int price){
+        return name+"("+formatWon(price)+")";
+    }
+
+    private static void formatMenus(List<String> list){
+        System.out.println(String.join(",",list)+"\n");
+    }
+
+    private static void formatEventDetails(String eventName, String EventDetails){
+        System.out.println(eventName+": "+EventDetails);
     }
 
     public static String formatWon(int amount){
@@ -239,5 +236,8 @@ public class OutputView {
         return formatter.format(amount);
     }
 
+    private static void formatBenefitDetails(String event, int benefit){
+        System.out.println(event+": "+formatWon(-benefit));
+    }
 
 }
