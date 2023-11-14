@@ -72,7 +72,7 @@ public class Calculator {
         int count = 0;
         for (OrderMenu orderMenu : orderMenus) {
             String name = orderMenu.getName();
-            if (menu.getMenuCategory(name) == "desserts") {
+            if (menu.getMenuCategory(name).equals("desserts")) {
                 count += orderMenu.getQuantity();
             }
         }
@@ -98,11 +98,11 @@ public class Calculator {
         return 0;
     }
 
-    private static int countMainDishes(List<OrderMenu> orderMenus, Menu menu) {
+    public static int countMainDishes(List<OrderMenu> orderMenus, Menu menu) {
         int count = 0;
         for (OrderMenu orderMenu : orderMenus) {
             String name = orderMenu.getName();
-            if (menu.getMenuCategory(name) == "mainDishes") {
+            if (menu.getMenuCategory(name).equals("mainDishes")) {
                 ++count;
             }
         }

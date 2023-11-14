@@ -19,7 +19,7 @@ public enum OutputMessage {
     TOTAL_BENEFIT_AMOUNT("<총혜택 금액>"),
     AFTER_DISCOUNT_AMOUNT("<할인 후 예상 결제 금액>"),
     EVENT_BADGE("<12월 이벤트 배지>"),
-    NEW_YEAR_EVENT("이 배지를 가지고 2024년 새해 이벤트에 참여하시면 새해 선물을 드립니다!");
+    NEW_YEAR_EVENT("12월 이벤트 배지로 2024년 새해 이벤트에 참여하여 새해 선물을 받아가세요!");
     String message;
 
     OutputMessage(String message) {

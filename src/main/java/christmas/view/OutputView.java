@@ -174,6 +174,9 @@ public class OutputView {
     }
 
     private static int displayWeekEvent(Receipt receipt, Menu menu, int visitDate) {
+        if (Calculator.countDesserts(receipt.getOrderMenus(), menu) == 0) {
+            return 0;
+        }
         if (Calculator.isWeekEvent(visitDate)) {
             String event = EventMessage.WEEK_DISCOUNT.getEventName();
             int benefit = Calculator.weekEvent(receipt, menu);
@@ -184,6 +187,9 @@ public class OutputView {
     }
 
     private static int displayWeekendEvent(Receipt receipt, Menu menu, int visitDate) {
+        if (Calculator.countMainDishes(receipt.getOrderMenus(), menu) == 0) {
+            return 0;
+        }
         if (Calculator.isWeekendEvent(visitDate)) {
             String event = EventMessage.WEEKEND_DISCOUNT.getEventName();
             int benefit = Calculator.weekendEvent(receipt, menu);
