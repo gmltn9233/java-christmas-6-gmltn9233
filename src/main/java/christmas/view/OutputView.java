@@ -78,7 +78,7 @@ public class OutputView {
             benefitmAmount -= displaySpecialEvent(receipt, visitDate);
             benefitmAmount -= displayGiftEvent(beforeDiscountTotal);
         }
-        if (!Calculator.canEvent(beforeDiscountTotal)) {
+        if (!Calculator.canEvent(beforeDiscountTotal)||benefitmAmount==0) {
             System.out.println(EventMessage.NO_EVENT.getEventName());
         }
         System.out.println();

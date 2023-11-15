@@ -107,6 +107,22 @@ class ApplicationTest extends NsTest {
         });
     }
 
+    @Test
+    void 주중_이벤트_참여_불가() {
+        assertSimpleTest(() -> {
+            run("26", "타파스-2,제로콜라-1");
+            assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "없음");
+        });
+    }
+
+    @Test
+    void 주말_이벤트_참여_불가() {
+        assertSimpleTest(() -> {
+            run("30", "타파스-2,제로콜라-1");
+            assertThat(output()).contains("<혜택 내역>" + LINE_SEPARATOR + "없음");
+        });
+    }
+
     @Override
     protected void runMain() {
         Application.main(new String[]{});
