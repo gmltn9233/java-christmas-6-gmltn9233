@@ -16,4 +16,9 @@ public class OrderMenu {
     public int getQuantity() {
         return quantity;
     }
+
+    public int calculateMenu(Menu menu) {
+        return menu.getMenuPrice(name) * quantity;
+    }
+
 }

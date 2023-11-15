@@ -3,7 +3,9 @@ package christmas.model;
 import christmas.enums.ErrorMessage;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Menu {
     private List<MenuItem> menu;
@@ -44,4 +46,15 @@ public class Menu {
         allItems.addAll(menu);
         return allItems;
     }
+
+    public Map<String, Integer> getCategoryItem(String category) {
+        Map<String, Integer> categoryItems = new HashMap<>();
+        for (MenuItem menuItem : getAllmenuItem()) {
+            if (menuItem.getCategory().equals(category)) {
+                categoryItems.put(menuItem.getName(), menuItem.getPrice());
+            }
+        }
+        return categoryItems;
+    }
+
 }

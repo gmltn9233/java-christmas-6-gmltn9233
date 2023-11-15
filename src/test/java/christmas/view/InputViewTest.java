@@ -11,7 +11,8 @@ import org.junit.jupiter.api.Test;
 
 public class InputViewTest {
 
-    Menu menu = OrderSystem.initMenu();
+    private final OrderSystem orderSystem = new OrderSystem();
+    private final Menu menu = orderSystem.initMenu();
 
     @DisplayName("방문날짜가 비어있으면 예외가 발생한다.")
     @Test

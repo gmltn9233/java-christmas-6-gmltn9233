@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class InputView {
 
-    public static int validateInputVisitDate() {
+    public int validateInputVisitDate() {
         int visitDate;
         while (true) {
             try {
@@ -26,7 +26,7 @@ public class InputView {
         return visitDate;
     }
 
-    public static Map<String, Integer> validateInputMenu(Menu menu) {
+    public Map<String, Integer> validateInputMenu(Menu menu) {
         Map<String, Integer> orderList = new HashMap<>();
         while (true) {
             try {
@@ -42,13 +42,13 @@ public class InputView {
         return orderList;
     }
 
-    public static String inputVisitDate() {
+    public String inputVisitDate() {
         System.out.println(InputMessage.VISIT_DATE_INPUT.getMessage());
         String visitDate = Console.readLine();
         return visitDate;
     }
 
-    public static String[] inputMenu() {
+    public String[] inputMenu() {
         System.out.println(InputMessage.MENU_INPUT.getMessage());
         String menu = Console.readLine();
         return menu.split(",");

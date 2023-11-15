@@ -22,4 +22,5 @@ public class MenuItem {
     public String getCategory() {
         return category;
     }
+
 }
