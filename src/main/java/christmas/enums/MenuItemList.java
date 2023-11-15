@@ -1,7 +1,5 @@
 package christmas.enums;
 
-import christmas.model.MenuItem;
-
 public enum MenuItemList {
     MUSHROOM_SOUP("양송이수프", 6000, "appetizers"),
     TAPAS("타파스", 5500, "appetizers"),
